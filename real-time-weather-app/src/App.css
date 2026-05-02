@@ -1,30 +1,157 @@
-.loader-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background: #0b1020;
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+/* 🌌 fondo base */
+.weather-container {
+  position: relative;
+  min-height: 100vh;
+  padding: 20px;
+  z-index: 1;
+
+  background: linear-gradient(
+    to bottom,
+    #0b1020,
+    #0a1a3a,
+    #050814
+  );
+
   color: white;
+  overflow: hidden;
 }
 
-/* Planeta */
-.globe {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  background: url("https://upload.wikimedia.org/wikipedia/commons/8/80/World_map_-_low_resolution.svg");
-  background-size: cover;
-  animation: spin 4s linear infinite;
-  box-shadow: 0 0 20px rgba(0, 150, 255, 0.6);
+/* ✨ capa de estrellas global */
+.weather-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 200%;
+  height: 200%;
+
+  background-image:
+    radial-gradient(2px 2px at 20px 30px, white, transparent),
+    radial-gradient(1px 1px at 80px 10px, white, transparent),
+    radial-gradient(1px 1px at 130px 80px, white, transparent),
+    radial-gradient(2px 2px at 200px 150px, white, transparent),
+    radial-gradient(1px 1px at 300px 200px, white, transparent);
+
+  background-repeat: repeat;
+  background-size: 300px 300px;
+
+  opacity: 0.6;
+  animation: moveStars 120s linear infinite;
+
+  z-index: 0;
 }
 
-/* Animación de rotación */
-@keyframes spin {
+/* 🌠 animación estrellas */
+@keyframes moveStars {
   from {
-    transform: rotate(0deg);
+    transform: translate(0, 0);
   }
   to {
-    transform: rotate(360deg);
+    transform: translate(-300px, -300px);
   }
+}
+
+/* ===================================================== */
+/* 🌌 HEADER ESTILO MODERNO (SIN CURVAS) */
+/* ===================================================== */
+
+.App-header {
+  position: relative;
+  width: 100%;
+  padding: 30px 20px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+  color: white;
+
+  background: linear-gradient(to bottom, #0b1020, #050814);
+
+  /* ❌ eliminado borde curvo */
+  border-radius: 0;
+
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+
+  z-index: 2;
+}
+
+/* 🌌 estrellas dentro del header */
+.App-header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background-image:
+    radial-gradient(2px 2px at 20px 30px, white, transparent),
+    radial-gradient(1px 1px at 80px 10px, white, transparent),
+    radial-gradient(1px 1px at 130px 80px, white, transparent),
+    radial-gradient(2px 2px at 200px 150px, white, transparent),
+    radial-gradient(1px 1px at 300px 200px, white, transparent);
+
+  background-size: 300px 300px;
+  opacity: 0.4;
+
+  animation: moveStarsHeader 120s linear infinite;
+
+  z-index: 0;
+}
+
+/* 🌠 animación header */
+@keyframes moveStarsHeader {
+  from {
+    transform: translate(0, 0);
+  }
+  to {
+    transform: translate(-300px, -300px);
+  }
+}
+
+/* 🔝 contenido encima de estrellas */
+.App-header h1,
+.App-header h2,
+.App-header img {
+  position: relative;
+  z-index: 2;
+}
+
+/* 🧠 título */
+.App-header h1 {
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+/* 🌍 país */
+.App-header h2 {
+  font-size: 16px;
+  font-weight: 400;
+  opacity: 0.8;
+  margin-bottom: 10px;
+  text-transform: capitalize;
+}
+
+/* 🇨🇱 bandera */
+.App-header img {
+  width: 60px;
+  height: auto;
+
+  border-radius: 6px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+
+  transition: transform 0.3s ease;
+}
+
+/* ✨ hover bandera */
+.App-header img:hover {
+  transform: scale(1.1) rotate(2deg);
 }

@@ -1,0 +1,165 @@
+
+
+/* 🌌 CONTENEDOR PRINCIPAL */
+.weather-container {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* 👈 FIX IMPORTANTE */
+
+  padding: 20px;
+
+  background: linear-gradient(to bottom, #0b1020, #050814);
+  color: white;
+
+  z-index: 1;
+}
+
+/* 🌌 ESTRELLAS */
+.weather-container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background-image:
+    radial-gradient(2px 2px at 20px 30px, white, transparent),
+    radial-gradient(1px 1px at 80px 10px, white, transparent),
+    radial-gradient(1px 1px at 130px 80px, white, transparent),
+    radial-gradient(2px 2px at 200px 150px, white, transparent),
+    radial-gradient(1px 1px at 300px 200px, white, transparent);
+
+  background-size: 300px 300px;
+  opacity: 0.5;
+
+  animation: moveStars 120s linear infinite;
+
+  z-index: 0;
+}
+
+/* 🌠 animación estrellas suave */
+@keyframes moveStars {
+  from {
+    transform: translate(0, 0);
+  }
+  to {
+    transform: translate(-300px, -300px);
+  }
+}
+
+/* 🔝 TODO EL CONTENIDO ENCIMA DE ESTRELLAS */
+.current-weather,
+.forecast,
+.weather-card {
+  position: relative;
+  z-index: 2;
+}
+
+/* 🌤️ clima actual */
+.current-weather {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+/* 📅 GRID RESPONSIVO */
+.forecast {
+  width: 100%;
+  display: grid;
+
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  justify-items: center;
+}
+
+/* 🧩 CARD */
+.weather-card {
+  width: 100%;
+  max-width: 200px;
+
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: 14px;
+  padding: 12px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  cursor: pointer;
+
+  backdrop-filter: blur(6px);
+}
+
+/* ✨ hover */
+.weather-card:hover {
+  transform: scale(1.06);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.25);
+}
+
+/* 📅 día */
+.card-day {
+  color: black;
+  font-weight: 600;
+  text-transform: capitalize;
+  margin-bottom: 6px;
+}
+
+/* 🌤️ clima */
+.card-weather {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: black;
+}
+
+/* ⏳ LOADING OVERLAY (FIX REAL) */
+.loading-overlay {
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 999;
+
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(5px);
+
+  text-align: center;
+}
+
+/* 🌍 icono loading */
+.loading-icon {
+  font-size: 80px;
+  margin-bottom: 15px;
+  animation: pulse 1.5s infinite;
+}
+
+/* 🧠 texto loading */
+.loading-text {
+  font-size: 26px;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+
+  max-width: 80%;
+}
+
+/* ✨ animación icono */
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 0.7; }
+  50% { transform: scale(1.2); opacity: 1; }
+  100% { transform: scale(1); opacity: 0.7; }
+}
